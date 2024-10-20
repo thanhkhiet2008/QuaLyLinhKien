@@ -1,9 +1,9 @@
 <?php
 include 'config.php';
 class Database{
-    var $sql;// chứa chuỗi lệnh truy vấn sql
-    var $conn;// kết nối csdl qua PDO
-    var $st; //Statment dùng để prepare và exec
+    var $sql;
+    var $conn;
+    var $st; 
     function __construct()
     {
         try{
@@ -43,12 +43,6 @@ function executeSql($params=[])
 echo $e->getMessage();
     }
 }
-// function xoa($params=[])
-// {
-//     $sql = "DELETE FROM `linhkien` WHERE `MaSP`=?";
-//     $this->db->setSql($sql);
-//     return $this->db->executeSql($params);
-// }
 }
 
 
