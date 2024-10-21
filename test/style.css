@@ -40,7 +40,7 @@ table{
   
 }
 table, th, td {
-    border: 2px solid rgb(235, 235, 235);
+    border: 2px solid rgb(158, 142, 142);
     border-collapse: collapse;
     padding: 10px;
   }
@@ -48,7 +48,7 @@ table, th, td {
 
   a {
       text-decoration: none;
-      color: blue;
+      color: rgb(17, 0, 255);
   }
 
   a:hover{
@@ -64,10 +64,92 @@ table, th, td {
   td, tr {
       background-color:rgb(245, 245, 245);
   }
-  /* Thiết lập tổng thể */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+}
+
+.search-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 20px 0;
+    padding-right: 20px;
+}
+
+
+.search-input {
+    width: 150px;
+    padding: 5px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    transition: width 0.3s ease-in-out;
+}
+
+
+.search-input:focus {
+    width: 300px;
+    border-color: #007BFF; 
+}
+
+
+.search-button {
+    background-color: #007BFF;
+    color: white;
+    padding: 5px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+
+@media (max-width: 768px) {
+    .search-container {
+        justify-content: center;
+        padding-right: 0;
+    }
+
+    .search-input {
+        width: 150px;
+    }
+
+    .search-input:focus {
+        width: 250px;
+    }
+}
+
+/* Style the dropdown container */
+.dropdown-container {
+    margin: 20px;
+    text-align: center;
+}
+
+/* Style the dropdown */
+.category-dropdown {
+    width: 200px;
+    padding: 5px;
+    font-size: 15px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+/* Change the border and background color when the dropdown is focused */
+.category-dropdown:focus {
+    border-color: #007BFF;
+    background-color: #fff;
 }
