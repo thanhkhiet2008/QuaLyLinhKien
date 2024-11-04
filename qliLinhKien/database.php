@@ -18,7 +18,7 @@ class Database{
         }
     
     }
-    function setSQL($sql)
+    function setSql($sql)
     {
         $this ->sql = $sql;
     }
@@ -33,6 +33,7 @@ class Database{
             echo $e->getMessage();
         }
     }
+    
 
 function executeSql($params=[])
 {
@@ -43,7 +44,24 @@ function executeSql($params=[])
 echo $e->getMessage();
     }
 }
+function xoa($params =[])
+{
+    $sql = "DELETE FROM `linhkien` WHERE `MaSP`=''";
+    $this->db->setSql($sql);
+    return $this->db->executeSql($params);
 }
+function xoa2($params =[])
+{
+    $sql = "DELETE FROM `nguoidung` WHERE `Ho`=''";
+    $this->db->setSql($sql);
+    return $this->db->executeSql($params);
+}
+}
+
+
+
+
+
 
 
 
