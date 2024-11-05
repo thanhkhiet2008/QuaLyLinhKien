@@ -16,23 +16,29 @@ $data = $db->layDanhSach();
     
 
     <div class="container">
+    <h2 class="float-end "><a href="DangNhap.php" class="btn btn-danger">Back</a></h2>
         <h1>Quản lí linh kiện PC</h1>
        
         <div class="search-container">
+       
             <input type="text" placeholder="Tìm kiếm..." class="search-input">
             <button type="submit" class="search-button">&#128269;</button>
+            
         </div>
 
         <a href="themLK-form.php" class="add-button">Thêm linh kiện</a>
         <a href="nguoidung.php" class="add-button">Quản lí người dùng</a>
+        <a href="NhanViena.php" class="add-button">Quản lí Nhân Viên</a>
         <table class="data-table">
             <thead>
                 <tr>
                     <th>Mã sản phẩm</th>
                     <th>Tên sản phẩm</th>
+                    <th>Tên nhãn hàng</th>
                     <th>Ngày nhập</th>
                     <th>Ngày xuất</th>
                     <th>Giá sản phẩm</th>
+                    <th>Số Lượng</th>
                     <th>Chức năng</th>
                 </tr>
             </thead>
@@ -41,9 +47,11 @@ $data = $db->layDanhSach();
                     <tr>
                         <td><?= htmlspecialchars($value->MaSP) ?></td>
                         <td><?= htmlspecialchars($value->TenSP) ?></td>
+                        <td><?= htmlspecialchars($value->NhanHang) ?></td>
                         <td><?= htmlspecialchars($value->NgayNhap) ?></td>
                         <td><?= htmlspecialchars($value->NgayXuat) ?></td>
                         <td><?= htmlspecialchars($value->GiaSP) ?></td>
+                        <td><?= htmlspecialchars($value->SoLuong) ?></td>
                         <td>
                             <button class="edit-button">Sửa</button>
                             <a href="xoa.php?MaSP=<?= htmlspecialchars($value->MaSP) ?>" onclick="return confirm('Bạn có chắc muốn xóa?');">
