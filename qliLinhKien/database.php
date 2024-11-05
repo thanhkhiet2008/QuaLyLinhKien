@@ -56,8 +56,13 @@ function xoa2($params =[])
     $this->db->setSql($sql);
     return $this->db->executeSql($params);
 }
+function xoa3($params =[])
+{
+    $sql = "DELETE FROM `nhanvien` WHERE `MaNV`=''";
+    $this->db->setSql($sql);
+    return $this->db->executeSql($params);
 }
-
+}
 
 
 
