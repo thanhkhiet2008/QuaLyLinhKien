@@ -52,7 +52,7 @@ $data = $db->layDanhSach();
                     
                         <td>
                             <button class="edit-button">Sửa</button>
-                            <a href="xoa2.php?Ho=<?= htmlspecialchars($value->MaNV) ?>" onclick="return confirm('Bạn có chắc muốn xóa?');">
+                            <a href="xoa3.php?MaNV=<?= htmlspecialchars($value->MaNV) ?>" onclick="return confirm('Bạn có chắc muốn xóa?');">
                                 <button class="delete-button">Xóa</button>
                             </a>
                         </td>
