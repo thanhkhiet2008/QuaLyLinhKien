@@ -59,6 +59,10 @@
                                 <input type="text" name="TenSP" class="form-control">
                             </div>
                             <div class="mb-3">
+                                <label>Nhãn Hàng</label>
+                                <input type="text" name="NhanHang" class="form-control">
+                            </div>
+                            <div class="mb-3">
                                 <label>Ngày nhập hàng </label>
                                 <input type="text" name="NgayNhap" class="form-control">
                             </div>
@@ -69,6 +73,10 @@
                             <div class="mb-3">
                                 <label>Giá sản phẩm</label>
                                 <input type="text" name="GiaSP" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label>Số Lượng</label>
+                                <input type="text" name="SoLuong" class="form-control">
                             </div>
                             
                            
