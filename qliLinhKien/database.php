@@ -63,11 +63,3 @@ function xoa3($params =[])
     return $this->db->executeSql($params);
 }
 }
-
-
-
-
-
-
-
-
