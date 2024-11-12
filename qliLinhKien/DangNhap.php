@@ -1,74 +1,122 @@
 <?php
-session_start();
+session_start(); 
 
-// Kiểm tra nếu người dùng đã đăng nhập rồi, chuyển hướng tới trang quản lý linh kiện
-if (isset($_SESSION['username'])) {
-    header('Location: index.php');
-    exit();
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "quan li linh kien may tinh"; 
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+
+if ($conn->connect_error) {
+    die("Kết nối thất bại: " . $conn->connect_error);
 }
 
-$error = '';
 
-// Xử lý đăng nhập khi người dùng gửi form
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    include 'database.php';  // Kết nối database
-    $db = new Database();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $TenDN = $_POST['TenDN'];
+    $MK = $_POST['MK'];
 
-    // Lấy tên đăng nhập và mật khẩu từ form
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+   
+    $sql = "SELECT * FROM user WHERE TenDN = ? AND MK = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $TenDN, $MK);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    // Truy vấn cơ sở dữ liệu để kiểm tra thông tin người dùng
-    $sql = "SELECT * FROM `users` WHERE `username` = :username LIMIT 1";
-    $db->setSQL($sql);
-    $db->bind(':username', $username);
-    $user = $db->layDanhSach()[0] ?? null; // Giả sử phương thức layDanhSach trả về danh sách, ta lấy user đầu tiên
-
-    if ($user && password_verify($password, $user->password)) {
-        // Mật khẩu đúng, lưu thông tin người dùng vào session
-        $_SESSION['username'] = $user->username;
-        $_SESSION['user_id'] = $user->id; // Giả sử có ID người dùng
-        header('Location: index.php');
-        exit();
+    if ($result->num_rows > 0) {
+       
+        $_SESSION['TenDN'] = $TenDN;
+        echo "Đăng nhập thành công! Xin chào " . $TenDN;
+      
+        header("Location: index.php");
     } else {
-        // Nếu thông tin đăng nhập không chính xác
-        $error = 'Tên đăng nhập hoặc mật khẩu không chính xác!';
+        echo "";
     }
 }
+
+$conn->close();
 ?>
 
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Đăng Nhập</title>
+    <title>Đăng nhập</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .login-container label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+            color: #555;
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .login-container button:hover {
+            background-color: #45a049;
+        }
+        .login-container input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+        .login-container button:active {
+            background-color: #3e8e41;
+        }
+    </style>
 </head>
 <body>
     <div class="login-container">
-        <h2>Đăng Nhập</h2>
-
-        <?php if ($error): ?>
-            <div class="error-message"><?= htmlspecialchars($error) ?></div>
-        <?php endif; ?>
-
-        <form action="login.php" method="POST">
-            <div class="form-group">
-                <label for="username">Tên đăng nhập: </label>
-                <input type="text" name="username" id="username" required>
-            </div>
-
-            <div class="form-group">
-                <label for="password">Mật khẩu:</label>
-                <input type="password" name="password" id="password" required>
-            </div>
-
-            <a href="index.php" class="button">Đăng nhập</a>
+        <h2>Đăng nhập</h2>
+        <form action="DangNhap.php" method="post">
+            <label for="TenDN">Tên đăng nhập:</label>
+            <input type="text" id="TenDN" name="TenDN" required>
+            <label for="MK">Mật khẩu:</label>
+            <input type="password" id="MK" name="MK" required>
+            <button type="submit">Đăng nhập</button>
         </form>
-
-        <p>Chưa có tài khoản? <a href="register.php">Đăng ký ngay</a></p>
     </div>
 </body>
 </html>
