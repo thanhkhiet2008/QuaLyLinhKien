@@ -1,7 +1,17 @@
 <?php
 include 'database.php';
 $db = new Database();
-$db->setSQL("SELECT * FROM `NhanVien`");
+$db->setSQL("SELECT * FROM `nhanvien`");
+$data = $db->layDanhSach();
+$limit = 5; // Giói hạng số cột có trong một trang
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = max($page, 1); 
+$offset = ($page - 1) * $limit;
+$db->setSQL("SELECT COUNT(*) AS total FROM `nhanvien`");
+$total_result = $db->layDanhSach();
+$total_rows = $total_result[0]->total;
+$total_pages = ceil($total_rows / $limit);
+$db->setSQL("SELECT * FROM `nhanvien` LIMIT $limit OFFSET $offset");
 $data = $db->layDanhSach();
 ?>
 <!DOCTYPE html>
@@ -66,6 +76,23 @@ $data = $db->layDanhSach();
                 <img src="https://pcmarket.vn/static/assets/2021/images/pcmarket-icon-mess-1.png" width="55" height="55" alt="Facebook Messenger Icon">
             </a>
         </div>
+        <div class="pagination">
+        <?php if ($page > 1): ?>
+            <a href="?page=<?= $page - 1 ?>" class="prev">« Trang trước</a>
+        <?php endif; ?>
+
+        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+            <?php if ($i == $page): ?>
+                <strong><?= $i ?></strong>
+            <?php else: ?>
+                <a href="?page=<?= $i ?>"><?= $i ?></a>
+            <?php endif; ?>
+        <?php endfor; ?>
+
+        <?php if ($page < $total_pages): ?>
+            <a href="?page=<?= $page + 1 ?>" class="next">Trang sau »</a>
+        <?php endif; ?>
+    </div>
     </div>
 </body>
 </html>
