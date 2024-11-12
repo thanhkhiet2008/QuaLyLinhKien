@@ -12,4 +12,4 @@ $db->setSQL( $sql);
 $kq=$db->executeSql([$Ho,$Ten,$SDT,$ĐiaChi,$GioiTinh,$NgaySinh]);
 if($kq) {echo "thanh cong";}
 ?>
-<a href="index.php"> Trang chủ </a>
+<a href="nguoidung.php"> Trang chủ </a>
