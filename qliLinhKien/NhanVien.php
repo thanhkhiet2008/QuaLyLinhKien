@@ -13,4 +13,4 @@ $db->setSQL( $sql);
 $kq=$db->executeSql([$MaNV,$TenNV,$GioiTinh,$SDT,$DiaChi,$ChucVu]);
 if($kq) {echo "thanh cong";}
 ?>
-<a href="index.php"> Trang chủ </a>
+<a href="NhanViena.php"> Trang chủ </a>
